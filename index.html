@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TokoKu — Toko Online Sederhana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="webstatis.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">TokoKu</h1>
+
+      <div class="controls">
+        <input id="search" type="search" placeholder="Cari produk..." aria-label="Cari produk">
+        <select id="category">
+          <option value="all">Semua Kategori</option>
+        </select>
+        <select id="sort">
+          <option value="default">Urutkan</option>
+          <option value="price-asc">Harga: Rendah → Tinggi</option>
+          <option value="price-desc">Harga: Tinggi → Rendah</option>
+          <option value="name-asc">Nama: A → Z</option>
+        </select>
+        <button id="cart-btn" class="cart-btn" aria-haspopup="dialog" aria-expanded="false">
+          Keranjang (<span id="cart-count">0</span>)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="products" class="product-grid" aria-live="polite">
+      <!-- Produk dirender di sini -->
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 TokoKu — Demo toko online statis</p>
+    </div>
+  </footer>
+
+  <!-- Modal Keranjang -->
+  <div id="cart-modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <button class="modal-close" id="close-cart" aria-label="Tutup">&times;</button>
+      <h2 id="cart-title">Keranjang Anda</h2>
+      <div id="cart-items"></div>
+
+      <div class="cart-summary">
+        <div>Total: <strong id="cart-total">Rp0</strong></div>
+      </div>
+
+      <form id="checkout-form" class="checkout-form">
+        <h3>Checkout</h3>
+        <input type="text" id="name" placeholder="Nama" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit" class="btn-primary">Bayar (Demo)</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Detail Produk -->
+  <div id="product-modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="product-title">
+      <button class="modal-close" id="close-product" aria-label="Tutup">&times;</button>
+      <div id="product-detail"></div>
+    </div>
+  </div>
+
+  <script src="webstatis.js"></script>
+</body>
+</html>
