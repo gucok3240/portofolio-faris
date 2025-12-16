@@ -1,4 +1,3 @@
-// Data produk dummy
 const products = [
     {
         id: 1,
@@ -50,12 +49,10 @@ const products = [
     }
 ];
 
-// State aplikasi
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let filteredProducts = [...products];
 let currentSort = 'default';
 
-// DOM Elements
 const searchInput = document.getElementById('search');
 const categorySelect = document.getElementById('category');
 const sortSelect = document.getElementById('sort');
@@ -71,7 +68,6 @@ const productModal = document.getElementById('product-modal');
 const productDetail = document.getElementById('product-detail');
 const closeProductBtn = document.getElementById('close-product');
 
-// Utility functions
 function formatCurrency(amount) {
     return new Intl.NumberFormat('id-ID', {
         style: 'currency',
@@ -112,7 +108,6 @@ function animateElement(element, animation) {
     }, { once: true });
 }
 
-// Render produk
 function renderProducts(productsToRender) {
     productsContainer.innerHTML = '';
 
@@ -151,7 +146,6 @@ function renderProducts(productsToRender) {
             </div>
         `;
 
-        // Efek hover animasi
         productCard.addEventListener('mouseenter', () => {
             animateElement(productCard, 'bounce 0.6s ease-in-out');
         });
@@ -160,7 +154,6 @@ function renderProducts(productsToRender) {
     });
 }
 
-// Filter dan pencarian
 function filterProducts() {
     const searchTerm = searchInput.value.toLowerCase();
     const category = categorySelect.value;
@@ -176,7 +169,6 @@ function filterProducts() {
     renderProducts(filteredProducts);
 }
 
-// Sortir produk
 function sortProducts() {
     switch (currentSort) {
         case 'price-asc':
@@ -196,7 +188,6 @@ function sortProducts() {
     renderProducts(filteredProducts);
 }
 
-// Keranjang
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -277,7 +268,6 @@ function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Modal functions
 function openModal(modal) {
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -289,7 +279,6 @@ function closeModal(modal) {
     document.body.style.overflow = 'auto';
 }
 
-// Detail produk
 function viewProduct(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -308,7 +297,6 @@ function viewProduct(productId) {
     openModal(productModal);
 }
 
-// Checkout
 function handleCheckout(e) {
     e.preventDefault();
 
@@ -320,7 +308,6 @@ function handleCheckout(e) {
         return;
     }
 
-    // Simulasi checkout
     showToast('Checkout berhasil! (Demo)', 'success');
     cart = [];
     updateCart();
@@ -329,9 +316,7 @@ function handleCheckout(e) {
     checkoutForm.reset();
 }
 
-// Event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Populate categories
     const categories = [...new Set(products.map(p => p.category))];
     categories.forEach(category => {
         const option = document.createElement('option');
@@ -340,11 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
         categorySelect.appendChild(option);
     });
 
-    // Initial render
     renderProducts(products);
     updateCart();
 
-    // Search dengan debounce
     let searchTimeout;
     searchInput.addEventListener('input', () => {
         clearTimeout(searchTimeout);
@@ -357,14 +340,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sortProducts();
     });
 
-    // Cart modal
     cartBtn.addEventListener('click', () => openModal(cartModal));
     closeCartBtn.addEventListener('click', () => closeModal(cartModal));
 
-    // Product modal
     closeProductBtn.addEventListener('click', () => closeModal(productModal));
 
-    // Close modal on backdrop click
     [cartModal, productModal].forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
@@ -373,10 +353,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Checkout
     checkoutForm.addEventListener('submit', handleCheckout);
 
-    // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal(cartModal);
@@ -384,7 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Smooth scroll untuk anchor links (jika ada)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
@@ -396,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// CSS animations (ditambahkan via JS untuk efek dinamis)
 const style = document.createElement('style');
 style.textContent = `
     @keyframes fadeIn {
@@ -448,3 +424,4 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
